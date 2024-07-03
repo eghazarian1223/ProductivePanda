@@ -1,0 +1,33 @@
+# Dependency directories
+node_modules/
+
+# Environment configuration files
+.env
+.env.*
+server/config/productivepandacredentials.json
+
+# Logs
+*.log
+npm-debug.log*
+
+# Dependency locks
+# Uncomment if you decide not to track lock files
+# package-lock.json
+# yarn.lock
+
+# Build outputs
+dist/
+build/
+
+# Temporary files
+*.temp
+*.cache
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# IDE/Editor configurations
+.vscode/
+.idea/
+*.sublime-*
