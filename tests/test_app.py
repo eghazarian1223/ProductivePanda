@@ -8,7 +8,8 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 
 # Import statements for the modules
 from server.app import create_app 
-from server.api_services import preprocess_text, send_to_google_nlp_api
+# from server.api_services import preprocess_text, send_to_google_nlp_api
+from server.api_services.api_services import preprocess_text, send_to_google_nlp_api
 from server.config import get_nlp_client
 from server.models.User import User
 from server.models.Task import Task
