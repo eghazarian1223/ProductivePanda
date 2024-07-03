@@ -1,0 +1,12 @@
+README.md
+setup.py
+ella.egg-info/PKG-INFO
+ella.egg-info/SOURCES.txt
+ella.egg-info/dependency_links.txt
+ella.egg-info/top_level.txt
+server/__init__.py
+server/models/Task.py
+server/models/User.py
+server/models/__init__.py
+tests/__init__.py
+tests/test_app.py
