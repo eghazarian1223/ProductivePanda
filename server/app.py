@@ -5,13 +5,13 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, Length, ValidationError
 from flask_bcrypt import Bcrypt
-# from .models import User as MoodUser
-from server.models.User import User as MoodUser
-from google.cloud import firestore 
 
-db_firestore = firestore.Client()
+# from server.models.User import User as MoodUser
+# from google.cloud import firestore 
 
-app = Flask(__name__)
+# db_firestore = firestore.Client()
+
+app = Flask(__name__, template_folder='templates', static_folder='frontend')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///C:\\Users\\eghaz\\Downloads\\ProductivePandaDoingAgain\\instance\\database.db' # app.config sets up configuration settings that control app behavior
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'authenticationsecretkey'
@@ -73,11 +73,12 @@ def dashboard():
     if request.method == 'POST':
         input_text = request.form.get('inputText')
         if input_text:
-            mood_user = MoodUser(user_id=current_user.id)
-            mood_analysis = mood_user.analyze_mood(input_text)
-            mood_user.store_mood_analysis(mood_analysis)
-            flash('Mood analysis complete!', 'success')
-            return render_template('dashboard.html', name=current_user.username, mood_analysis=mood_analysis)
+            # mood_user = MoodUser(user_id=current_user.id)
+            # mood_analysis = mood_user.analyze_mood(input_text)
+            # mood_user.store_mood_analysis(mood_analysis)
+            # flash('Mood analysis complete!', 'success')
+            return render_template('dashboard.html', name=current_user.username)
+            # return render_template('dashboard.html', name=current_user.username, mood_analysis=mood_analysis)
     return render_template('dashboard.html', name=current_user.username)
 
 @app.route('/logout', methods=['Get', 'POST'])
@@ -114,13 +115,13 @@ def register():
 def todo():
     return render_template('todo.html')
 
-@app.route('/store_preferences', methods=['POST'])
-@login_required
-def store_preferences():
-    preferences = request.json.get('preferences')
-    mood_user = MoodUser(user_id=current_user.id, preferences=preferences)
-    mood_user.store_preferences()
-    return jsonify({"message": "Preferences stored successfully"})
+# @app.route('/store_preferences', methods=['POST'])
+# @login_required
+# def store_preferences():
+#     preferences = request.json.get('preferences')
+#     mood_user = MoodUser(user_id=current_user.id, preferences=preferences)
+#     mood_user.store_preferences()
+#     return jsonify({"message": "Preferences stored successfully"})
 
 
 if __name__ == "__main__":
