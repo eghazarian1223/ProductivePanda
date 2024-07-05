@@ -12,7 +12,7 @@ from flask_bcrypt import Bcrypt
 # db_firestore = firestore.Client()
 
 app = Flask(__name__, template_folder='templates', static_folder='frontend')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///C:\\Users\\eghaz\\Downloads\\ProductivePandaDoingAgain\\instance\\database.db' # app.config sets up configuration settings that control app behavior
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///C:\\Users\\eghaz\\Downloads\\ProductivePandaDoingAgain\\server\\database.db' # app.config sets up configuration settings that control app behavior
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'authenticationsecretkey'
 db = SQLAlchemy(app)  
