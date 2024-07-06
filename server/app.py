@@ -1,3 +1,28 @@
+import sys
+import os
+
+# Set up the environment
+current_dir = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.dirname(current_dir))
+
+# Set the environment variable for Google Cloud credentials
+credentials_path = r"C:\Users\eghaz\Downloads\ProductivePandaDoingAgain\server\config\productivepandacredentials.json"
+print("Credentials path:", credentials_path)
+
+# Debugging: List the contents of the directory
+config_dir = os.path.dirname(credentials_path)
+print("Contents of the config directory:", os.listdir(config_dir))
+
+# Check if the credentials file exists before setting the environment variable
+if not os.path.exists(credentials_path):
+    raise FileNotFoundError(f"Credentials file not found at {credentials_path}")
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = credentials_path
+
+# Initialize Firestore DB after setting the environment variable
+from google.cloud import firestore
+db_firestore = firestore.Client()
+
+# Import necessary modules
 from flask import Flask, render_template, url_for, redirect, flash, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
@@ -6,19 +31,18 @@ from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, Length, ValidationError
 from flask_bcrypt import Bcrypt
 from server.models.User import User as MoodUser
-from google.cloud import firestore 
 from server.config.config import get_nlp_client
 
-db_firestore = firestore.Client()
-
+# Initialize Flask app
 app = Flask(__name__, template_folder='templates', static_folder='frontend')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///C:\\Users\\eghaz\\Downloads\\ProductivePandaDoingAgain\\server\\database.db' # This might actually be the wrong one cuz apparently all of a sudden there are two (change accordingly)
+app.config['SQLALCHEMY_DATABASE_URI'] = r'sqlite:///C:\Users\eghaz\Downloads\ProductivePandaDoingAgain\server\database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'authenticationsecretkey'
-db = SQLAlchemy(app)  
+db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 app.app_context().push()
 
+# Set up Flask-Login
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "login"
@@ -27,18 +51,18 @@ login_manager.login_view = "login"
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-# Database Table
+# Define User model for the database
 class User(db.Model, UserMixin):
-    id = db.Column(db.Integer, primary_key=True) # Unique Id for each user
-    username = db.Column(db.String(20), nullable=False, unique=True) # Username will have maximum of 20 characters 
-    # unique = True means not more than one can have same username
-    password = db.Column(db.String(80), nullable=False) # Password will have maximum of 80 characters
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(20), nullable=False, unique=True)
+    password = db.Column(db.String(80), nullable=False)
 
+# Define forms
 class RegisterForm(FlaskForm):
     username = StringField(validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Username"})
     password = PasswordField(validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Password"})
     submit = SubmitField("Register")
-    # Distinguishes whether or not the username already exists
+
     def validate_username(self, username):
         existing_user_username = User.query.filter_by(username=username.data).first()
         if existing_user_username:
@@ -47,9 +71,9 @@ class RegisterForm(FlaskForm):
 class LoginForm(FlaskForm):
     username = StringField(validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Username", "class": "login-input-field"})
     password = PasswordField(validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Password", "class": "login-input-field"})
-    submit = SubmitField("Login", render_kw={"class": "app-login-button"}) # render_kw part gives a class to login button to change its appearance
- 
+    submit = SubmitField("Login", render_kw={"class": "app-login-button"})
 
+# Define routes
 @app.route('/')
 def home():
     return render_template('home.html')
@@ -116,7 +140,5 @@ def store_preferences():
     mood_user.store_preferences()
     return jsonify({"message": "Preferences stored successfully"})
 
-
 if __name__ == "__main__":
     app.run(debug=True)
-    
