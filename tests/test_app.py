@@ -36,12 +36,6 @@ def app():
     app = create_app()
     return app
 
-# Example pytest fixture for mocker
-@pytest.fixture
-def mocker():
-    from unittest.mock import patch
-    return patch
-
 # app.py tests
 def test_app_initialization(app):
     assert app is not None
@@ -60,7 +54,7 @@ def test_preprocess_text():
 def test_send_to_google_nlp_api(mocker):
     sample_text = "Natural Language Processing with Python is super fun!!"
     preprocessed = preprocess_text(sample_text)
-    mock_response = mocker.Mock()
+    mock_response = MagicMock()
     mock_response.document_sentiment.score = 0.9
     mock_response.document_sentiment.magnitude = 1.2
     mock_response.sentences = ["Natural Language Processing with Python is super fun!!"]
@@ -101,7 +95,6 @@ def test_analyze_mood(mocker):
     mocker.patch('server.api_services.api_services.parse_api_response', return_value=MagicMock())
     mocker.patch('server.api_services.api_services.extract_sentiment_score', return_value=0.9)
     mocker.patch('server.api_services.api_services.extract_keywords', return_value=["keyword1", "keyword2"])
-
     user = User(user_id="testuser")
     mood_analysis = user.analyze_mood("I am feeling very stressed out today")
     assert mood_analysis['sentimentScore'] == 0.9
