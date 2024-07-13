@@ -5,6 +5,7 @@ from server.api_services.api_services import (
 )
 
 from google.cloud import firestore
+import bcrypt
 
 db = firestore.Client()
 
@@ -28,6 +29,11 @@ class User:
             print(f"Preferences for user {self.user_id} successfully stored.")
         except Exception as e:
             print(f"An error occured while storing user preferences: {e}")
+    def set_password(self, password):
+        self.password_hash = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+
+    def check_password(self, password):
+        return bcrypt.checkpw(password.encode('utf-8'), self.password_hash)
     
     def analyze_mood(self, text):
         """
