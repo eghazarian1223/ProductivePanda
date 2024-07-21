@@ -7,21 +7,20 @@ from server.api_services.api_services import (
 from google.cloud import firestore
 import bcrypt
 
-db = firestore.Client()
-
 class User:
     def __init__(self, user_id, preferences=None, created_at=None, last_login=None):
         self.user_id = user_id
         self.preferences = preferences or {}
         self.created_at = created_at
         self.last_login = last_login
+        self.db = firestore.Client()
 
     def store_preferences(self):
         """
         Stores user preferences securely in Firestore
         """
         try:
-            db.collection('users').document(self.user_id).set({
+            self.db.collection('users').document(self.user_id).set({
                 'preferences': self.preferences,
                 'createdAt': self.created_at,
                 'lastLogin': self.last_login
@@ -40,10 +39,15 @@ class User:
         Analyzes the user's mood based on input text
         """
         preprocessed_text = preprocess_text(text)
+        print("Preprocessed text:", preprocessed_text)  # Debug statement
         response = send_to_google_nlp_api(preprocessed_text)
+        print("API Response:", response)  # Debug statement
         parsed_response =  parse_api_response(response)
+        print("Parsed Response:", parsed_response)  # Debug statement
         sentiment_score = extract_sentiment_score(parsed_response)
+        print("Sentiment Score:", sentiment_score)  # Debug statement
         keywords = extract_keywords(parsed_response)
+        print("Keywords:", keywords)  # Debug statement
         mood_category = self.classify_mood(sentiment_score)
         return {
             'inputText': text,
@@ -57,7 +61,7 @@ class User:
         Stores the mood analysis result in Firestore
         """
         try:
-            db.collection('moodAnalysis').document().set({
+            self.db.collection('moodAnalysis').document().set({
                 'userId': self.user_id,
                 'inputText': mood_analysis['inputText'],
                 'sentimentScore': mood_analysis['sentimentScore'],
@@ -75,7 +79,7 @@ class User:
         """
         self.last_login = firestore.SERVER_TIMESTAMP
         try:
-            db.collection('users').document(self.user_id).update({
+            self.db.collection('users').document(self.user_id).update({
                 'lastLogin': self.last_login
             })
             print(f"Last login for user {self.user_id} successfully updated.")
