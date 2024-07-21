@@ -1,7 +1,7 @@
 
 from flask import Blueprint, request, jsonify
-from server.api_services.api_services import (preprocess_text, send_to_google_nlp_api, parse_api_response, extract_sentiment_score,extract_keywords)
-from server.models.User import User as MoodUser
+from api_services.api_services import (preprocess_text, send_to_google_nlp_api, parse_api_response, extract_sentiment_score,extract_keywords)
+import User as MoodUser
 from google.cloud import firestore 
 
 db = firestore.Client()
