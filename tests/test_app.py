@@ -13,8 +13,8 @@ from server.app import create_app
 from server.api.task_controller import task_controller, decrypt_data ,compare_mood_with_tasks, recommend_general_uplifting_tasks, store_user_data_securely, retrieve_user_data_securely, delete_no_longer_needed_data
 from server.app import create_app 
 from server.config.config import get_nlp_client
-from server.models.User import User
-from server.models.User import MoodUser
+from server.models.user_sqlalchemy_firestore_models import User
+from server.models.user_sqlalchemy_firestore_models import MoodUser
 from server.models.Task import Task
 from server.api_handler.api_services import preprocess_text, send_to_google_nlp_api
 from server.api.task_controller import reorganize_tasks_based_on_mood_and_sentiment
