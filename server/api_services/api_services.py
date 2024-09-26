@@ -6,7 +6,7 @@ from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 import sys
 sys.path.append(".")
-from config import get_nlp_client
+from config.config import get_nlp_client
 from google.cloud import firestore, language_v1
 
 
