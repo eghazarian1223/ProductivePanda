@@ -1,5 +1,3 @@
-
-import sys
 import os
 from flask import Flask, render_template, url_for, redirect, flash, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
