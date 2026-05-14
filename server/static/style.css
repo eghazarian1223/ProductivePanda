@@ -1,0 +1,908 @@
+* {
+    margin: 2px;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+body {
+    background-color: mediumaquamarine;
+    color: white;
+    font-family: "Poppins", sans-serif;
+    min-height: 100vh;
+    
+}
+
+
+.fas.fa-plus-circle {
+    font-size: 2.0rem;
+    margin-left: 0.1px;  
+    
+}
+.todo-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+    padding-left: 4px;
+    padding-right: 1px;
+    padding-top: 7px;
+    padding-bottom: 9.5px;
+    margin-left: 20px;
+  
+    font-size: 2rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 45%;
+    line-height: 40px;
+    text-align: center;
+    border: none;
+}
+
+form button {
+    color: rgb(255, 127, 80);
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-left: 0.5rem;
+}
+
+form button:hover {
+    color: white;
+    background: rgb(255, 127, 80);
+
+}
+
+
+.fa-plus-circle {
+    margin-top: 0.3rem;
+    margin-left: -8px;
+}
+
+.todo-container{
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+.todo-list {
+    min-width: 17%;
+    list-style: none;
+    
+}
+
+.todo-input::placeholder {
+    font-size: smaller;
+}
+.todo-input {
+
+    font-size: large;
+}
+.todo {
+    margin: 0.5rem;
+    padding-left: 0.5rem;
+    background: white;
+    color: black;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.5s;
+    border-radius: 2rem;
+    
+}
+
+.todo li {
+    flex: 1;
+}
+
+.select {
+    
+    border: none;
+    margin: 1rem;
+    position: relative;
+    overflow: hidden;
+    border-radius: 30px;
+    height: 50px;
+    width: 130px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+    border: none;
+    color: rgb(255, 127, 80);
+    width: 100%;
+    height: 100%;
+    border-radius: 50px;
+    cursor: pointer;
+    padding: 0;
+    padding: 1rem;
+}
+
+select, .filter-todos {
+    height: 60px;
+    
+}
+
+.trash-button,
+.check-mark-btn {
+    color: white;
+    border: none;
+    padding: 2rem;
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
+
+.check-mark-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgb(255, 127, 80);
+    border-radius: 5px;
+    width: 30px;
+    height: 30px;
+    padding: 10px;
+
+   
+    margin-right: 7px;
+    
+}
+
+.finished {
+    text-decoration: line-through;
+    color: grey;
+    opacity: 0.6;
+}
+
+
+.trash-btn {
+    /* border-top-right-radius: 1.75rem;
+    border-bottom-right-radius: 1.75rem; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    width: 30px;
+    height: 30px;
+    padding: 10px;
+    background: rgb(171, 171, 171);
+    margin-right: 17px;
+
+}
+
+.todo-item {
+    padding: 0rem 0.5rem;
+
+}
+
+.fa-trash,
+.fa-check-circle {
+    pointer-events: none;
+
+}
+
+.finished {
+    text-decoration: line-through;
+    opacity: 0.5;
+}
+
+.slide {
+    transform: translateX(10rem);
+    opacity: 0;
+}
+
+/*::after adds content/decorative elements to .select */
+.select::after {
+    content:"\25BC";
+    position: absolute;
+    background: rgb(255, 127, 80);
+    top: 0;
+    right: 0;
+    padding: 0.9rem;
+    transform: translate(-7px, 5px); 
+    border-radius: 20px;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    width: 12px;
+    height: 11px;
+}
+
+
+.select:hover::after {
+    background: rgb(255, 166, 133);
+    color: rgb(255, 127, 80);
+}
+/* These styles below are for the home page "home.html" */
+.home-page-title {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-top: 40px;
+   
+}
+.home-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+}
+
+.home-login-button {
+
+    display: inline-block;
+    padding: 10px 25px;
+    color: white;
+    background-color:  rgb(255, 127, 80);
+    text-decoration: none;
+    border-radius: 15px;
+    margin: 0 10px;
+}
+
+.home-register-button {
+    display: inline-block;
+    padding: 10px 20px;
+    color: white;
+    background-color: rgb(255, 127, 80);
+    text-decoration: none;
+    border-radius: 15px;
+    margin: 0 10px;
+}
+
+.home-login-button:hover,
+.home-register-button:hover {
+    background: rgb(255, 166, 133);
+    color: rgb(255, 127, 80);
+}
+
+/* Styles for login page "login.html" */
+.login-page-title {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-top: 40px;
+}
+
+ .app-login-button {
+    display: inline-block;
+    padding: 10px 15px;
+    color: white;
+    background-color:  rgb(255, 127, 80);
+    text-decoration: none;
+    height: 44px;
+    border-radius: 20px;
+    margin: 0 25px;
+}
+
+form .app-login-button:hover {
+    background: rgb(255, 166, 133);
+    color: rgb(255, 127, 80);
+}
+
+form .login-form {
+    box-sizing: border-box;      
+    margin: 20px auto;
+   
+    
+}
+.login-input-field {
+    width: 20%; /* Styles the "username" and "password" fields within the .login-form container */
+}
+
+
+form .login-input-field::placeholder { 
+    text-align: center;
+}
+
+.login-register-container {
+    display: flex;
+    justify-content: center;
+}
+
+.login-register-btn {   /* Button to redirect from login page to sign-up page*/
+    display: inline-block;
+    justify-content: center;
+    padding: 10px 15px;
+    color: white;
+    background-color:  rgb(255, 127, 80);
+    text-decoration: none;
+    height: 40px;
+    border-radius: 20px;
+    margin-top: 90px;
+}
+.login-register-btn:hover {
+    background: rgb(255, 166, 133);
+    color: rgb(255, 127, 80);
+}
+
+/* Now styling classes in dashboard.html */
+
+.welcome-message {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.logout-container { /* This is the class div that encapsulates logout-link-button */
+    display: flex;
+    justify-content: center;
+    margin-top: 200px;
+}
+.logout-link-button {
+    display: inline-block;
+    justify-content: center;
+    padding: 10px 15px;
+    color: white;
+    background-color:  rgb(255, 127, 80);
+    text-decoration: none;
+    height: 44px;
+    border-radius: 20px;
+   
+    /* margin-bottom: 100px; */
+    /* margin-bottom: 200px; */
+    margin-top: -130px;
+}
+
+.logout-link-button:hover {
+    background: rgb(255, 166, 133);
+    color: rgb(255, 127, 80);
+}
+
+.parent-dashboard-container {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    height: 30vh;
+}
+
+.dashboard-todo-container {
+    display: inline-block;
+
+    padding: 10px 15px;
+    color: white;
+    background-color:  rgb(255, 127, 80);
+    text-decoration: none;
+    /* height: 44px; */
+    border-radius: 20px;
+    /* margin: 0 25px; */
+    margin-top: 280px;
+    
+}
+.todo-link {
+    color: white; 
+    display: block; 
+    text-align: center;
+    text-decoration: none; 
+}
+.dashboard-todo-container:hover {
+    background: rgb(255, 166, 133);
+    color: rgb(255, 127, 80);
+}
+/* Home page redesign */
+.home-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.home-wrapper {
+    text-align: center;
+    padding: 2rem;
+}
+
+.home-title {
+    font-size: 4rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem 0;
+    letter-spacing: -1px;
+}
+
+.home-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.85;
+    margin: 0 0 2.5rem 0;
+}
+
+.home-features {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.home-features span {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.5rem 1.2rem;
+    border-radius: 2rem;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.home-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+/* Auth pages (login + register) */
+.auth-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.auth-card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+    border-radius: 1.5rem;
+    padding: 2.5rem 3rem;
+    text-align: center;
+    width: 100%;
+    max-width: 360px;
+}
+
+.auth-title {
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin: 0 0 0.25rem 0;
+    letter-spacing: -1px;
+}
+
+.auth-subtitle {
+    font-size: 1rem;
+    opacity: 0.8;
+    margin: 0 0 1.75rem 0;
+}
+
+.auth-form {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    min-height: unset !important;
+    gap: 0.85rem;
+}
+
+.auth-input {
+    width: 100% !important;
+    padding: 0.7rem 1rem !important;
+    font-size: 1rem !important;
+    border-radius: 0.75rem !important;
+    border: none !important;
+    font-family: "Poppins", sans-serif;
+    box-sizing: border-box;
+}
+
+.auth-submit {
+    padding: 0.75rem !important;
+    font-size: 1rem !important;
+    font-family: "Poppins", sans-serif;
+    background: rgb(255, 127, 80) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 0.75rem !important;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin: 0 !important;
+}
+
+.auth-submit:hover {
+    background: rgb(255, 100, 50) !important;
+}
+
+.auth-switch {
+    margin-top: 1.25rem;
+    font-size: 0.9rem;
+    opacity: 0.85;
+}
+
+.auth-switch a {
+    color: white;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+/* Dashboard */
+.dash-body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.dash-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 2.5rem;
+    background: rgba(255,255,255,0.1);
+    font-size: unset;
+    min-height: unset;
+}
+
+.dash-logo {
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+}
+
+.dash-nav {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.dash-nav-link {
+    color: white;
+    text-decoration: none;
+    padding: 0.45rem 1rem;
+    border-radius: 2rem;
+    font-size: 0.9rem;
+    background: rgba(255,255,255,0.15);
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.dash-nav-link:hover {
+    background: rgba(255,255,255,0.25);
+}
+
+.dash-logout {
+    background: rgba(255,127,80,0.4);
+}
+
+.dash-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 2rem;
+    text-align: center;
+}
+
+.dash-greeting {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin: 0 0 0.4rem 0;
+}
+
+.dash-prompt {
+    font-size: 1.1rem;
+    opacity: 0.8;
+    margin: 0 0 2rem 0;
+}
+
+.mood-form {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    min-height: unset !important;
+    width: 100%;
+    max-width: 520px;
+    gap: 0.75rem;
+}
+
+.mood-input {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 1rem;
+    border: none;
+    font-family: "Poppins", sans-serif;
+    font-size: 0.95rem;
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+.mood-submit {
+    padding: 0.8rem;
+    background: rgb(255, 127, 80);
+    color: white;
+    border: none;
+    border-radius: 0.75rem;
+    font-family: "Poppins", sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.mood-submit:hover {
+    background: rgb(255, 100, 50);
+}
+
+.mood-result {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.mood-badge {
+    padding: 0.5rem 1.75rem;
+    border-radius: 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    background: rgba(255,255,255,0.2);
+}
+
+.mood-badge.mood-positive { background: rgba(100, 220, 130, 0.35); }
+.mood-badge.mood-negative { background: rgba(255, 100, 100, 0.35); }
+.mood-badge.mood-neutral  { background: rgba(255, 255, 255, 0.2); }
+
+.mood-score {
+    font-size: 0.95rem;
+    opacity: 0.8;
+    margin: 0;
+}
+
+.flash {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* ── Dashboard sections ── */
+.dash-main {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.section-title {
+    font-size: 1rem;
+    font-weight: 600;
+    opacity: 0.85;
+    margin-bottom: 0.75rem;
+}
+
+/* Suggestions */
+.suggestions-section {
+    background: rgba(255,255,255,0.12);
+    border-radius: 14px;
+    padding: 1.25rem 1.5rem;
+}
+
+.suggestion-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.suggestion-item {
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.suggestion-item .fas { opacity: 0.7; font-size: 0.8rem; }
+
+/* Tasks section on dashboard */
+.tasks-section {
+    background: rgba(255,255,255,0.1);
+    border-radius: 14px;
+    padding: 1.25rem 1.5rem;
+}
+
+.tasks-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.manage-tasks-link {
+    color: white;
+    font-size: 0.85rem;
+    opacity: 0.75;
+    text-decoration: none;
+}
+
+.manage-tasks-link:hover { opacity: 1; }
+
+.task-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 0.65rem 1rem;
+    font-size: 0.95rem;
+}
+
+.priority-label {
+    font-size: 0.75rem;
+    opacity: 0.65;
+    font-weight: 500;
+}
+
+.no-tasks {
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+.no-tasks a { color: white; }
+
+/* ── Todo page ── */
+.todo-body {
+    background: linear-gradient(135deg, #5BBFAA 0%, #3d9e87 100%);
+    min-height: 100vh;
+    font-family: "Poppins", sans-serif;
+    color: white;
+}
+
+.todo-main {
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+}
+
+.todo-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.add-task-form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+    align-items: center;
+}
+
+.add-task-input {
+    flex: 1;
+    min-width: 0;
+    padding: 0.65rem 1rem;
+    border-radius: 8px;
+    border: none;
+    font-size: 0.9rem;
+    font-family: "Poppins", sans-serif;
+    background: rgba(255,255,255,0.9);
+    color: #333;
+}
+
+.priority-select {
+    flex-shrink: 0;
+    padding: 0.65rem 0.75rem;
+    border-radius: 8px;
+    border: none;
+    font-size: 0.85rem;
+    font-family: "Poppins", sans-serif;
+    background: rgba(255,255,255,0.9);
+    color: #333;
+    cursor: pointer;
+}
+
+.add-task-btn {
+    flex-shrink: 0;
+    padding: 0.65rem 1.1rem;
+    border-radius: 8px;
+    border: none;
+    background: #e07a5f;
+    color: white;
+    font-size: 0.9rem;
+    font-family: "Poppins", sans-serif;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.add-task-btn:hover { background: #c9614a; }
+
+.todo-filters {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.filter-btn {
+    padding: 0.35rem 0.9rem;
+    border-radius: 20px;
+    border: 1.5px solid rgba(255,255,255,0.5);
+    background: transparent;
+    color: white;
+    font-size: 0.85rem;
+    font-family: "Poppins", sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+    background: rgba(255,255,255,0.2);
+    border-color: white;
+}
+
+.todo-task-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.todo-task-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: rgba(255,255,255,0.12);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    transition: opacity 0.2s;
+}
+
+.todo-task-item.completed { opacity: 0.5; }
+.todo-task-item.completed .task-text { text-decoration: line-through; }
+
+.check-btn, .delete-btn {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    opacity: 0.75;
+    transition: opacity 0.2s;
+}
+
+.check-btn:hover, .delete-btn:hover { opacity: 1; }
+.delete-btn { margin-left: auto; font-size: 0.9rem; }
+
+.task-text {
+    flex: 1;
+    font-size: 0.95rem;
+}
+
+.priority-tag {
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 0.2rem 0.55rem;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.priority-tag.priority-high   { background: rgba(220,60,60,0.3); }
+.priority-tag.priority-medium { background: rgba(255,200,50,0.3); }
+.priority-tag.priority-low    { background: rgba(100,220,130,0.3); }
+
+.empty-msg {
+    font-size: 0.9rem;
+    opacity: 0.65;
+    text-align: center;
+    padding: 1rem;
+}

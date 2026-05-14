@@ -6,19 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous">
-    <link rel="stylesheet" href="/frontend/style.css">
-    <title>Register</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Sign up — Attune</title>
 </head>
-<body>
-    <h1>Register Page</h1>
-    <form method="POST" action="">
-        {{ form.hidden_tag() }}
-        {{ form.username }}
-        {{ form.password }}
-        {{ form.submit }}
-    </form>
-    <a href="{{url_for('login')}}">Already have an account? Log in</a>
+<body class="auth-body">
+    <div class="auth-card">
+        <h1 class="auth-title">Attune</h1>
+        <p class="auth-subtitle">Create your account</p>
+        <form method="POST" action="" class="auth-form">
+            {{ form.hidden_tag() }}
+            {{ form.username(class_='auth-input', placeholder='Username') }}
+            {{ form.password(class_='auth-input', placeholder='Password') }}
+            {{ form.submit(class_='auth-submit') }}
+        </form>
+        <p class="auth-switch">Already have an account? <a href="{{url_for('login')}}">Log in</a></p>
+    </div>
 </body>
 </html>

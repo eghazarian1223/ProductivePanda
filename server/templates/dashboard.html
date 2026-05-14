@@ -2,29 +2,100 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous">
-    <link rel="stylesheet" href="/frontend/style.css">
-    
-    <title>Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Dashboard — Attune</title>
 </head>
-<body>
-    <h1 class="welcome-message">Hello 👋 you are Logged in</h1>
-    <div class="parent-dashboard-container">
-        <div class="dashboard-todo-container">
-            <a href="{{url_for('todo')}}" class="todo-link">Go to To-Do List</a>
-        </div>
-    </div>
+<body class="dash-body">
 
+    <header class="dash-header">
+        <span class="dash-logo">Attune</span>
+        <nav class="dash-nav">
+            <a href="{{ url_for('todo') }}" class="dash-nav-link"><i class="fas fa-list-check"></i> My Tasks</a>
+            <form action="{{ url_for('logout') }}" method="post" style="display:inline">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button type="submit" class="logout-btn">Log out</button>
+            </form>
+        </nav>
+    </header>
 
-    <div class="logout-container">
-        <a href="{{url_for('logout')}}" class="logout-link-button">Log Out</a>
-    </div>
-    
-    
+    <main class="dash-main">
+
+        <section class="mood-section">
+            <h2 class="dash-greeting">How are you feeling, {{ name }}?</h2>
+            <form class="mood-form" method="POST" action="/dashboard">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <textarea class="mood-input" name="inputText" rows="3"
+                    placeholder="Describe how you're feeling right now...">{{ request.form.get('inputText', '') }}</textarea>
+                <button type="submit" class="mood-submit">Analyze my mood</button>
+            </form>
+
+            {% if mood_analysis %}
+            <div class="mood-result">
+                <span class="mood-badge mood-{{ mood_analysis.moodCategory }}">
+                    {{ mood_analysis.moodCategory | capitalize }}
+                </span>
+                <span class="mood-score">Score: {{ "%.2f"|format(mood_analysis.sentimentScore) }}</span>
+            </div>
+            {% endif %}
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% for category, message in messages %}
+                    <p class="flash flash-{{ category }}">{{ message }}</p>
+                {% endfor %}
+            {% endwith %}
+        </section>
+
+        {% if suggestions %}
+        <section class="suggestions-section">
+            <h3 class="section-title">Suggested for you right now</h3>
+            <ul class="suggestion-list">
+                {% for s in suggestions %}
+                <li class="suggestion-item"><i class="fas fa-heart"></i> {{ s }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+        {% endif %}
+
+        <section class="tasks-section">
+            <div class="tasks-header">
+                <h3 class="section-title">
+                    {% if mood_analysis %}
+                        {% if mood_analysis.moodCategory == 'negative' %}
+                            Start small — your easiest tasks first
+                        {% elif mood_analysis.moodCategory == 'positive' %}
+                            You're on a roll — tackle your top priorities
+                        {% else %}
+                            Your tasks for today
+                        {% endif %}
+                    {% else %}
+                        Your tasks
+                    {% endif %}
+                </h3>
+                <a href="{{ url_for('todo') }}" class="manage-tasks-link">+ Manage tasks</a>
+            </div>
+
+            {% if tasks %}
+            <ul class="task-list">
+                {% for task in tasks %}
+                <li class="task-item priority-{{ task.priority }}">
+                    <span class="task-title">{{ task.title }}</span>
+                    <span class="priority-label">
+                        {% if task.priority >= 4 %}High{% elif task.priority == 3 %}Medium{% else %}Low{% endif %}
+                    </span>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p class="no-tasks">No pending tasks. <a href="{{ url_for('todo') }}">Add some tasks</a> to get started.</p>
+            {% endif %}
+        </section>
+
+    </main>
+
 </body>
 </html>
