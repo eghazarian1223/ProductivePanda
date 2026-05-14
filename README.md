@@ -1,4 +1,4 @@
-Attune is your personal productivity assistant, designed to help you optimize your daily routine, track your mood, and improve your task management—all powered by natural language processing. Attune learns from your inputs to provide personalized recommendations to help you stay on track and feel accomplished every day.
+Attune is your personal productivity assistant, designed to help you optimize your daily routine, track your mood, and improve your task management powered by natural language processing. Attune learns from your inputs to provide personalized recommendations to help you stay on track and feel accomplished every day.
 
 
 Why Attune? 
